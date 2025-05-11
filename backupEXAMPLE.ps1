@@ -79,7 +79,7 @@ Copy-Item "$userPath\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Des
 # Copy Oh-My-Posh config
 Copy-Item "$userPath\stelbent-compact.minimal.omp.json" -Destination $configBackupPath -Force #-Recurse
 # Copy Yazi config
-Copy-Item "$userPath\AppData\Roaming\yazi" -Destination $configBackupPath -Force #-Recurse
+Copy-Item "$userPath\AppData\Roaming\yazi\config" -Destination "$configBackupPath\yazi" -Force #-Recurse
 
 # =================================== 
 # ===== Backup to storage drive =====
@@ -87,18 +87,19 @@ Copy-Item "$userPath\AppData\Roaming\yazi" -Destination $configBackupPath -Force
 Write-Host "Backing up $picturesPath to $storageDrive\Pictures..."
 Copy-Item $picturesPath -Destination $storageDrive\Pictures -Recurse -Force
 
+Write-Host "Backing up $documentsPath to $storageDrive\Documents..."
 # Backup Misc
-Copy-Item "$documentsPath\Misc" -Destination $storageDrive\Documents -Recurse -Force
+Copy-Item "$documentsPath\Misc" -Destination "$storageDrive\Documents" -Recurse -Force
 # Backup My Games
-Copy-Item "$documentsPath\My Games" -Destination $storageDrive\Documents -Recurse -Force
+Copy-Item "$documentsPath\My Games" -Destination "$storageDrive\Documents" -Recurse -Force
 # Backup Obsidian
-Copy-Item "$documentsPath\Obsidian" -Destination $storageDrive\Documents -Recurse -Force
+Copy-Item "$documentsPath\Obsidian" -Destination "$storageDrive\Documents" -Recurse -Force
 # Backup Obsidian_Backups
-Copy-Item "$documentsPath\Obsidian_Backups" -Destination $storageDrive\Documents -Recurse -Force
+Copy-Item "$documentsPath\Obsidian_Backups" -Destination "$storageDrive\Documents" -Recurse -Force
 # Backup Official Documents
-Copy-Item "$documentsPath\Official Documents" -Destination $storageDrive\Documents -Recurse -Force
+Copy-Item "$documentsPath\Official Documents" -Destination "$storageDrive\Documents" -Recurse -Force
 # Backup config_backup
-Copy-Item "$documentsPath\config_backup" -Destination $storageDrive\Documents -Recurse -Force
+Copy-Item "$documentsPath\config_backup" -Destination "$storageDrive\Documents" -Recurse -Force
 
 # =================================== 
 # ===== Backup to external drive ====
@@ -110,17 +111,17 @@ if (Test-Path -Path $externalDrive) {
 
     Write-Host "Backing up $documentsPath to $externalDrive\Documents..."
     # Backup Misc
-    Copy-Item "$documentsPath\Misc" -Destination $externalDrive\Documents -Recurse -Force
+    Copy-Item "$documentsPath\Misc" -Destination "$externalDrive\Documents" -Recurse -Force
     # Backup My Games
-    Copy-Item "$documentsPath\My Games" -Destination $externalDrive\Documents -Recurse -Force
+    Copy-Item "$documentsPath\My Games" -Destination "$externalDrive\Documents" -Recurse -Force
     # Backup Obsidian
-    Copy-Item "$documentsPath\Obsidian" -Destination $externalDrive\Documents -Recurse -Force
+    Copy-Item "$documentsPath\Obsidian" -Destination "$externalDrive\Documents" -Recurse -Force
     # Backup Obsidian_Backups
-    Copy-Item "$documentsPath\Obsidian_Backups" -Destination $externalDrive\Documents -Recurse -Force
+    Copy-Item "$documentsPath\Obsidian_Backups" -Destination "$externalDrive\Documents" -Recurse -Force
     # Backup Official Documents
-    Copy-Item "$documentsPath\Official Documents" -Destination $externalDrive\Documents -Recurse -Force
+    Copy-Item "$documentsPath\Official Documents" -Destination "$externalDrive\Documents" -Recurse -Force
     # Backup config_backup
-    Copy-Item "$documentsPath\config_backup" -Destination $externalDrive\Documents -Recurse -Force
+    Copy-Item "$documentsPath\config_backup" -Destination "$externalDrive\Documents" -Recurse -Force
 }
 else {
     Write-Host "External Drive not connected. Skipping backup to external drive."
