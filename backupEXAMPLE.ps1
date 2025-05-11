@@ -120,7 +120,8 @@ Copy-Item "$userPath\.glzr\glazewm\config.yaml" -Destination $configBackupPath -
 Copy-Item "$userPath\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Destination $configBackupPath -Force #-Recurse
 # Copy Oh-My-Posh config
 Copy-Item "$userPath\stelbent-compact.minimal.omp.json" -Destination $configBackupPath -Force #-Recurse
-
+# Copy Yazi config
+Copy-Item "$userPath\AppData\Roaming\yazi" -Destination $configBackupPath -Force #-Recurse
 
 # =================================== 
 # =========== Git Backup ============
