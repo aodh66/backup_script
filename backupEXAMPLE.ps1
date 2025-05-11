@@ -61,22 +61,44 @@ Write-Host "Backup initiated!"
 Write-Host "userFolder is: $userFolder, scriptPath is: $scriptPath"
 
 # =================================== 
+# ========== Config Backup ==========
+# =================================== 
+Write-Host "Performing config backup..."
+# Copy Obsidian config
+Copy-Item "$userPath\Documents\Obsidian\.obsidian" -Destination $configBackupPath -Recurse -Force
+# Copy Neovim config
+Copy-Item "$userPath\AppData\Local\nvim" -Destination $configBackupPath -Recurse -Force
+# Copy VSCode config
+Copy-Item "$userPath\AppData\Roaming\Code\User" -Destination $configBackupPath -Recurse -Force
+# Copy SyncTrayzor config
+Copy-Item "$userPath\AppData\Roaming\SyncTrayzor\config.xml" -Destination $configBackupPath -Force #-Recurse
+# Copy GlazeWM config
+Copy-Item "$userPath\.glzr\glazewm\config.yaml" -Destination $configBackupPath -Force #-Recurse
+# Copy PowerShell 7 config
+Copy-Item "$userPath\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Destination $configBackupPath -Force #-Recurse
+# Copy Oh-My-Posh config
+Copy-Item "$userPath\stelbent-compact.minimal.omp.json" -Destination $configBackupPath -Force #-Recurse
+# Copy Yazi config
+Copy-Item "$userPath\AppData\Roaming\yazi" -Destination $configBackupPath -Force #-Recurse
+
+# =================================== 
 # ===== Backup to storage drive =====
 # =================================== 
 Write-Host "Backing up $picturesPath to $storageDrive\Pictures..."
 Copy-Item $picturesPath -Destination $storageDrive\Pictures -Recurse -Force
 
-Write-Host "Backing up $documentsPath to $storageDrive\Documents..."
 # Backup Misc
 Copy-Item "$documentsPath\Misc" -Destination $storageDrive\Documents -Recurse -Force
-# # Backup My Games
+# Backup My Games
 Copy-Item "$documentsPath\My Games" -Destination $storageDrive\Documents -Recurse -Force
-# # Backup Obsidian
+# Backup Obsidian
 Copy-Item "$documentsPath\Obsidian" -Destination $storageDrive\Documents -Recurse -Force
-# # Backup Obsidian_Backups
+# Backup Obsidian_Backups
 Copy-Item "$documentsPath\Obsidian_Backups" -Destination $storageDrive\Documents -Recurse -Force
-# # Backup Official Documents
+# Backup Official Documents
 Copy-Item "$documentsPath\Official Documents" -Destination $storageDrive\Documents -Recurse -Force
+# Backup config_backup
+Copy-Item "$documentsPath\config_backup" -Destination $storageDrive\Documents -Recurse -Force
 
 # =================================== 
 # ===== Backup to external drive ====
@@ -97,31 +119,12 @@ if (Test-Path -Path $externalDrive) {
     Copy-Item "$documentsPath\Obsidian_Backups" -Destination $externalDrive\Documents -Recurse -Force
     # Backup Official Documents
     Copy-Item "$documentsPath\Official Documents" -Destination $externalDrive\Documents -Recurse -Force
+    # Backup config_backup
+    Copy-Item "$documentsPath\config_backup" -Destination $externalDrive\Documents -Recurse -Force
 }
 else {
     Write-Host "External Drive not connected. Skipping backup to external drive."
 }
-
-# =================================== 
-# ========== Config Backup ==========
-# =================================== 
-Write-Host "Performing config backup..."
-# Copy Obsidian config
-Copy-Item "$userPath\Documents\Obsidian\.obsidian" -Destination $configBackupPath -Recurse -Force
-# Copy Neovim config
-Copy-Item "$userPath\AppData\Local\nvim" -Destination $configBackupPath -Recurse -Force
-# Copy VSCode config
-Copy-Item "$userPath\AppData\Roaming\Code\User" -Destination $configBackupPath -Recurse -Force
-# Copy SyncTrayzor config
-Copy-Item "$userPath\AppData\Roaming\SyncTrayzor\config.xml" -Destination $configBackupPath -Force #-Recurse
-# Copy GlazeWM config
-Copy-Item "$userPath\.glzr\glazewm\config.yaml" -Destination $configBackupPath -Force #-Recurse
-# Copy PowerShell 7 config
-Copy-Item "$userPath\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Destination $configBackupPath -Force #-Recurse
-# Copy Oh-My-Posh config
-Copy-Item "$userPath\stelbent-compact.minimal.omp.json" -Destination $configBackupPath -Force #-Recurse
-# Copy Yazi config
-Copy-Item "$userPath\AppData\Roaming\yazi" -Destination $configBackupPath -Force #-Recurse
 
 # =================================== 
 # =========== Git Backup ============
